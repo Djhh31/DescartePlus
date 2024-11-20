@@ -4,5 +4,8 @@
     <string name="embreve">Em breve</string>
     <string name="pesquisar_placeholder">Pesquisar por endereço</string>
     <string name="localizacao_atual">Usar minha localização atual</string>
+    <string name="Endereco">Endereço:</string>
+    <string name="Cep">cep:</string>
+    <string name="SubPrefeitura">Subprefeitura:</string>
 
 </resources>
