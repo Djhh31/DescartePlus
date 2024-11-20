@@ -49,13 +49,30 @@
             android:layout_height="match_parent"
             android:src="@drawable/icon_search"/>
         <EditText
+            android:id="@+id/SearchTextBox"
             android:background="@android:color/transparent"
             android:layout_marginHorizontal="10sp"
-            android:layout_width="match_parent"
+            android:layout_width="0sp"
+            android:layout_weight="10"
             android:layout_height="wrap_content"
             android:hint="@string/pesquisar_placeholder"
             android:textColorHint="@color/DarkGreenTranslucido"
             android:textColor="@color/DarkGreen"
+            android:singleLine="true"
+            android:textSize="15sp"
+            />
+        <ImageButton
+            android:id="@+id/ClearButton"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_x"
+            android:padding="0sp"
+            android:textSize="15sp"
+            android:textColor="@color/DarkGreen"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+            android:visibility="gone"
             />
     </LinearLayout>
 
@@ -147,5 +164,17 @@
             android:indeterminate="true"
             android:visibility="gone"
             />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
     </FrameLayout>
+
 </RelativeLayout>

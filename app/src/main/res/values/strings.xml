@@ -2,7 +2,7 @@
     <string name="app_name">Descarte+</string>
     <string name="Card1">Encontre a data da Coleta</string>
     <string name="embreve">Em breve</string>
-    <string name="pesquisar_placeholder">Pesquisar por endereço</string>
+    <string name="pesquisar_placeholder">Usar endereço + nº + bairro ou CEP</string>
     <string name="localizacao_atual">Usar minha localização atual</string>
     <string name="Endereco">Endereço: </string>
     <string name="Cep">cep: </string>
