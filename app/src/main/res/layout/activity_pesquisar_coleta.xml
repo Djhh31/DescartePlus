@@ -12,7 +12,8 @@
         android:id="@+id/decorative_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_bar">
+        android:background="@drawable/gradient_bar"
+        android:fitsSystemWindows="false">
 
         <ImageButton
             android:id="@+id/Backbutton"
@@ -53,6 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/pesquisar_placeholder"
+            android:textColorHint="@color/DarkGreenTranslucido"
+            android:textColor="@color/DarkGreen"
             />
     </LinearLayout>
 
@@ -72,7 +75,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="@android:color/darker_gray" />
+            android:background="@color/DarkGreenTranslucido" />
 
         <!-- Texto central -->
         <TextView
@@ -81,7 +84,7 @@
             android:text="OU"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/DarkGreenTranslucido"
             android:textStyle="bold" />
 
         <!-- Linha da direita -->
@@ -89,7 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="@android:color/darker_gray" />
+            android:background="@color/DarkGreenTranslucido"  />
 
     </LinearLayout>
 
@@ -125,8 +128,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
             <!-- Card view -->
 
         </LinearLayout>
@@ -146,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true"
-            android:visibility="gone"
             />
+        <!--android:visibility="gone"-->
     </FrameLayout>
 </RelativeLayout>
