@@ -20,6 +20,10 @@ public abstract class UniversalService {
     }
 
     public abstract String ApiUrlBuild();
-    public abstract List<Data> GetData();
+    public abstract void GetDataAsync(OnDataReceivedListener listener);
+
+    public interface OnDataReceivedListener {
+        void onDataReceived(List<Data> results);
+    }
 
 }

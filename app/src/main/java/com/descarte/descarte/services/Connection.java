@@ -28,7 +28,7 @@ public class Connection {
         try {
             URL url = new URL(urlString);
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("Get");
+            urlConnection.setRequestMethod("GET");
             urlConnection.setConnectTimeout(5000);
             urlConnection.setReadTimeout(5000);
 
@@ -38,6 +38,7 @@ public class Connection {
 
             if (status == 200) { // Código de sucesso HTTP
                 dataString = readerStream(urlConnection.getInputStream());
+                System.out.println(dataString);
             } else {
                 System.out.println("Falha na consulta. Código de status: " + status);
             }

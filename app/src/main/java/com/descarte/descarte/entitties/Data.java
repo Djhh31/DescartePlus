@@ -1,7 +1,5 @@
 package com.descarte.descarte.entitties;
 
-import androidx.annotation.NonNull;
-
 public class Data {
 
     public String Endereco;
@@ -10,84 +8,41 @@ public class Data {
     public Coleta Domiciliar;
     public Coleta Seletiva;
 
-    public void Endereco(String Tipo, String Logradouro){
-        this.Endereco = Tipo + ". " + Logradouro;
+    public void setEndereco(String Tipo, String Titulo, String Preposicao, String Logradouro){
+
+        StringBuilder sb = new StringBuilder();
+
+        if (Tipo != null && !Tipo.equals("-")){
+            sb.append(firstToUpper(Tipo)).append(". ");
+        }
+
+        if (Titulo != null && !Titulo.equals("-")){
+            sb.append(firstToUpper(Titulo)).append(" ");
+        }
+
+        if (Preposicao != null && !Preposicao.equals("-")){
+            sb.append(firstToUpper(Preposicao)).append(" ");
+        }
+
+        if (Logradouro != null && !Logradouro.equals("-")){
+            sb.append(firstToUpper(Logradouro)).append(" ");
+        }
+
+        this.Endereco = sb.toString();
     }
 
-    public static class Coleta{
-        public boolean Seg;
-        public boolean Ter;
-        public boolean Qua;
-        public boolean Qui;
-        public boolean Sex;
-        public boolean Sab;
-        public boolean Dom;
-        public EnumPeriodo Periodo;
+    private String firstToUpper(String input){
+        String[] words = input.split(" ");  // Dividir a string em palavras
+        StringBuilder sb = new StringBuilder();
 
-        public void Periodo(String p){
-            try {
-                this.Periodo = Periodo.valueOf(p.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                System.out.println("Valor inválido para Periodo: " + p);
+        for (String word : words) {
+            if (!word.isEmpty()) {  // Verificar se a palavra não está vazia
+                sb.append(word.substring(0, 1).toUpperCase())  // Primeira letra em maiúscula
+                        .append(word.substring(1).toLowerCase())  // Resto da palavra em minúscula
+                        .append(" ");  // Adicionar espaço entre as palavras
             }
         }
 
-        @NonNull
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-            boolean has = false;
-            if (Seg){
-                sb.append("Segunda");
-                has = true;
-            }
-            if (Ter){
-                if (has){
-                    sb.append(", ");
-                }
-                sb.append("Terça");
-                has = true;
-            }
-            if (Qua) {
-                if (has){
-                    sb.append(", ");
-                }
-                sb.append("Quarta");
-                has = true;
-            }
-            if (Qui) {
-                if (has){
-                    sb.append(", ");
-                }
-                sb.append("Quinta");
-                has = true;
-            }
-            if (Sex) {
-                if (has){
-                    sb.append(", ");
-                }
-                sb.append("Sexta");
-                has = true;
-            }
-            if (Sab) {
-                if (has){
-                    sb.append(", ");
-                }
-                sb.append("Sábado");
-                has = true;
-            }
-            if (Dom) {
-                if (has){
-                    sb.append(", ");
-                }
-                sb.append("Domingo");
-                has = true;
-            }
-            if (!has){
-                sb.append("Não Atendido");
-            }
-
-            return sb.toString();
-        }
+        return sb.toString().trim();
     }
 }
