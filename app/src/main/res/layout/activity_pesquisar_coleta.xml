@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
+    tools:context=".ActivityPesquisarColeta">
+
+    <LinearLayout
+        android:id="@+id/decorative_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_bar">
+
+        <ImageButton
+            android:id="@+id/Backbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:padding="30sp"
+            android:src="@drawable/icon_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Card1"
+            android:textStyle="bold"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/SearchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/BackgroundColor"
+        android:layout_below="@+id/decorative_bar"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginTop="20sp"
+        android:padding="5sp"
+        android:elevation="5sp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_search"/>
+        <EditText
+            android:background="@android:color/transparent"
+            android:layout_marginHorizontal="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pesquisar_placeholder"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ou_decoration"
+        android:layout_below="@id/SearchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginHorizontal="25sp"
+        android:layout_marginVertical="5sp"
+        >
+
+        <!-- Linha da esquerda -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Texto central -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OU"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold" />
+
+        <!-- Linha da direita -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@android:color/darker_gray" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/loc_atualLayout"
+        android:layout_below="@+id/ou_decoration"
+        android:layout_marginHorizontal="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/localizacao_atual"
+            android:elevation="2sp"
+            android:backgroundTint="@color/LightGreen"
+            android:textColor="@color/DarkGreen"
+            />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/ScrollFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/loc_atualLayout"
+        android:layout_margin="10sp"
+        >
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <!-- Card view -->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/loc_atualLayout"
+        android:layout_margin="10sp"
+        android:layout_gravity="center"
+        >
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
+            />
+    </FrameLayout>
+</RelativeLayout>

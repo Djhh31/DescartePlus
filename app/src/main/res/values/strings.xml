@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Descarte+</string>
-    <string name="Card1">Pesquisar data de coleta</string>
+    <string name="Card1">Pesquisar data da coleta</string>
     <string name="embreve">Em breve</string>
+    <string name="pesquisar_placeholder">Pesquisar por endereço</string>
+    <string name="localizacao_atual">Usar minha localização atual</string>
+
 </resources>
