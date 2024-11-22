@@ -33,14 +33,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.descarte.descarte.entitties.Data;
 import com.descarte.descarte.services.LogaService;
+import com.descarte.descarte.services.StringFormater;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class ActivityPesquisarColeta extends AppCompatActivity {
 
@@ -154,7 +153,6 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
                             TryConnection(latitude,longitude);
                             clearMainLayout();
                         } else {
-                            System.out.println("Não foi possível obter a localização.");
                             message("Não foi possível obter a localização.");
                         }
                     }
@@ -165,10 +163,9 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
     public void obterCoordenadasDeEndereco(String endereco) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
-        endereco = enderecoRefine(endereco);
+        endereco = StringFormater.extend(endereco);
 
         try {
-            // Solicita a lista de endereços correspondentes
             List<Address> enderecoList = geocoder.getFromLocationName(endereco, 1); // O '1' significa que queremos no máximo 1 resultado
 
             if (enderecoList != null && !enderecoList.isEmpty()) {
@@ -189,54 +186,6 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
         }
     }
 
-    // Limpesa do endereço
-    private String enderecoRefine(String endereco) {
-        // Mapeamento das abreviações
-        Map<String, String> abreviacoes = new HashMap<>();
-
-        // Abreviações de logradouro
-        abreviacoes.put("r ", "rua ");
-        abreviacoes.put("r ", "rua ");
-        abreviacoes.put("av ", "avenida ");
-        abreviacoes.put("tv ", "travessa ");
-        abreviacoes.put("pc ", "praça ");
-        abreviacoes.put("al ", "alameda ");
-        abreviacoes.put("lgo ", "largo ");
-        abreviacoes.put("estr ", "estrada ");
-        abreviacoes.put("rod ", "rodovia ");
-        abreviacoes.put("bl ", "bloco ");
-        abreviacoes.put("qd ", "quadra ");
-        abreviacoes.put("cj ", "conjunto ");
-        abreviacoes.put("bs ", "beco ");
-        abreviacoes.put("v ", "viação ");
-        abreviacoes.put("c ", "caminho ");
-
-        // Abrev de titulos de logradouro
-        abreviacoes.put("dr ", "doutor ");
-        abreviacoes.put("prof ", "professor ");
-        abreviacoes.put("com ", "comendador ");
-        abreviacoes.put("eng ", "engenheiro ");
-        abreviacoes.put("cel ", "coronel ");
-        abreviacoes.put("v ", "visconde ");
-        abreviacoes.put("sra ", "senhora ");
-        abreviacoes.put("m ", "marechal ");
-        abreviacoes.put("tte ", "tenente ");
-
-        // Converter para minúsculas
-        endereco = endereco.toLowerCase();
-
-        // Adicionar espaço no final
-        endereco = endereco + " ";
-        endereco = endereco.replaceAll("[^a-zA-Z0-9\\s]", "");
-
-        endereco = endereco.replace(".", "");
-        // Iterar sobre o mapa e substituir as abreviações
-        for (Map.Entry<String, String> entry : abreviacoes.entrySet()) {
-            endereco = endereco.replace(entry.getKey(), entry.getValue());
-        }
-        return endereco.trim();
-    }
-
     public void TryConnection(double lat, double lgn){
         try {
             runOnUiThread(() -> Loading.setVisibility(View.VISIBLE));
@@ -252,7 +201,6 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
                         }
                         Loading.setVisibility(View.GONE);
                     } else {
-                        System.out.println("Lista está vazia ou nula.");
                         message("Nenhum resultado encontrado! ");
                         Loading.setVisibility(View.GONE);
                     }
@@ -261,7 +209,7 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            message("Algo deu errado..." + ex.getMessage());
+            message("Algo deu errado...");
         }
     }
 
@@ -276,7 +224,7 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
         CardView clonedCardView = (CardView) inflater.inflate(R.layout.cardview, parentLayout, false);
 
         TextView end = clonedCardView.findViewById(R.id.endereco);
-        end.setText(data.Endereco);
+        end.setText(StringFormater.firstToUpper(data.Endereco));
         TextView cep = clonedCardView.findViewById(R.id.cep);
         cep.setText(data.Cep);
         TextView sub = clonedCardView.findViewById(R.id.subPrefeitura);
@@ -284,17 +232,25 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
 
         TextView periodoCommum = clonedCardView.findViewById(R.id.comum_periodo);
         String periodoComumString =  data.Domiciliar.Periodo.toString();
-        periodoCommum.setText(periodoComumString);
+        if (data.Domiciliar.Periodo.isEmpty()){
+            periodoCommum.setText("");
+        }else{
+            periodoCommum.setText(StringFormater.firstToUpper(periodoComumString));
+        }
 
         TextView periodoReciclavel = clonedCardView.findViewById(R.id.reciclavel_periodo);
         String periodoReciclavelString = data.Seletiva.Periodo.toString();
-        periodoReciclavel.setText(periodoReciclavelString);
+        if (data.Seletiva.Periodo.isEmpty()){
+            periodoReciclavel.setText("");
+        }else{
+            periodoReciclavel.setText(StringFormater.firstToUpper(periodoReciclavelString));
+        }
 
         TextView semanaComum =  clonedCardView.findViewById(R.id.comum_semana);
-        semanaComum.setText(data.Domiciliar.toString());
+        semanaComum.setText(StringFormater.firstToUpper(data.Domiciliar.toString()));
 
         TextView semanaReciclavel =  clonedCardView.findViewById(R.id.reciclavel_semana);
-        semanaReciclavel.setText(data.Seletiva.toString());
+        semanaReciclavel.setText(StringFormater.firstToUpper(data.Seletiva.toString()));
 
         return clonedCardView;
     }

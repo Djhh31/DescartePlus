@@ -11,7 +11,7 @@ public class Coleta{
     public boolean Sex;
     public boolean Sab;
     public boolean Dom;
-    public EnumPeriodo Periodo;
+    public String Periodo;
 
     public Coleta(boolean seg, boolean ter, boolean qua, boolean qui, boolean sex, boolean sab, boolean dom) {
         Seg = seg;
@@ -25,14 +25,6 @@ public class Coleta{
 
     public Coleta(boolean isNull){
         isNull = isNull;
-    }
-
-    public void Periodo(String p){
-        try {
-            this.Periodo = Periodo.valueOf(p.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Valor inválido para Periodo: " + p);
-        }
     }
 
     @NonNull

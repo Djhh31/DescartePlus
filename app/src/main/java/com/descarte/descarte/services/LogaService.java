@@ -69,7 +69,7 @@ public class LogaService extends UniversalService {
                                     domiciliar.optBoolean("HasSab", false),
                                     domiciliar.optBoolean("HasDom", false)
                             );
-                            data.Domiciliar.Periodo(domiciliar.getString("Periodo"));
+                            data.Domiciliar.Periodo = domiciliar.getString("Periodo");
                         } else {
                             data.Domiciliar = new Coleta(true);
                         }
@@ -85,10 +85,10 @@ public class LogaService extends UniversalService {
                                     seletiva.optBoolean("HasSab",false),
                                     seletiva.optBoolean("HasDom",false)
                             );
-                            data.Seletiva.Periodo(seletiva.getString("Periodo"));
+                            data.Seletiva.Periodo = seletiva.getString("Periodo");
                         }
                         else {
-                            data.Domiciliar = new Coleta(true);
+                            data.Seletiva = new Coleta(true);
                         }
                         results.add(data);
                         System.out.println(data);
