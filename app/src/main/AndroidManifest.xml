@@ -16,6 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Descarte"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/GoogleKey"/>
+
+        <activity
+            android:name=".ProcurarCentrosDeReciclagens"
+            android:exported="false" />
         <activity
             android:name=".ActivityPesquisarColeta"
             android:exported="false" />
@@ -24,10 +32,8 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

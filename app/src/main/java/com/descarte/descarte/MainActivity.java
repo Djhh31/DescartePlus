@@ -2,6 +2,8 @@ package com.descarte.descarte;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +22,19 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        ProgressBar loading = findViewById(R.id.loading);
+
         CardView card1 = findViewById(R.id.card1);
         card1.setOnClickListener(v -> {
+            loading.setVisibility(View.VISIBLE);
             Intent intent = new Intent(MainActivity.this, ActivityPesquisarColeta.class);
+            startActivity(intent);
+        });
+
+        CardView card2 = findViewById(R.id.card2);
+        card2.setOnClickListener(v -> {
+            loading.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(MainActivity.this, ProcurarCentrosDeReciclagens.class);
             startActivity(intent);
         });
 
@@ -32,5 +44,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
     }
 }

@@ -55,9 +55,9 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
 
         // Set Loading Progress Bar
         Loading = findViewById(R.id.loading);
-        Window window = getWindow();
 
         // Set Notification bar color
+        Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DarkGreen));
 
@@ -191,7 +191,7 @@ public class ActivityPesquisarColeta extends AppCompatActivity {
             runOnUiThread(() -> Loading.setVisibility(View.VISIBLE));
             LogaService LogaS = new LogaService(lat,lgn);
 
-            LogaS.GetDataAsync(results -> {
+            LogaS.GetDataAsync(this, results -> {
                 runOnUiThread(() -> {
                     if (results != null && !results.isEmpty()) {
                         LinearLayout parentLayout = findViewById(R.id.content);

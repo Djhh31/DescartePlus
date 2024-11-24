@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Descarte+</string>
     <string name="Card1">Encontre a data da Coleta</string>
+    <string name="Card2">Localize Pontos de Coleta</string>
     <string name="embreve">Em breve</string>
     <string name="pesquisar_placeholder">Usar endereço + nº + bairro ou CEP</string>
     <string name="localizacao_atual">Usar minha localização atual</string>

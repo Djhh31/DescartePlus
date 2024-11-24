@@ -17,11 +17,10 @@ public class Connection {
     }
 
     public CompletableFuture<String> getDataAsync() {
-        return CompletableFuture.supplyAsync(this::CallApi);
+        return CompletableFuture.supplyAsync(this::callApi);
     }
 
-    private String CallApi(){
-
+    private String callApi(){
         String dataString = "";
         HttpURLConnection urlConnection = null;
 
@@ -33,32 +32,22 @@ public class Connection {
             urlConnection.setReadTimeout(5000);
 
             int status = urlConnection.getResponseCode();
-            System.out.println("API Request URL: " + urlString);
-            System.out.println("API Request Status: " + status);
-
-            if (status == 200) { // Código de sucesso HTTP
+            if (status == 200) {
                 dataString = readerStream(urlConnection.getInputStream());
-                System.out.println(dataString);
             } else {
-                System.out.println("Falha na consulta. Código de status: " + status);
+                System.err.println("Falha na consulta. Código de status: " + status);
             }
-        } catch (Exception ex){
-            System.out.println("Falha na consulta. " + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("Falha na consulta: " + ex.getMessage());
         } finally {
-            try {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-            catch (Exception ex){
-                System.out.println("Falha na consulta. " + ex.getMessage());
+            if (urlConnection != null) {
+                urlConnection.disconnect();
             }
         }
         return dataString;
     }
 
-    private String readerStream(InputStream in){
-
+    private String readerStream(InputStream in) {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             String line;
@@ -67,14 +56,6 @@ public class Connection {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return sb.toString();
     }

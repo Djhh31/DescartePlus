@@ -1,5 +1,8 @@
 package com.descarte.descarte.services;
 
+import android.content.Context;
+
+import com.descarte.descarte.R;
 import com.descarte.descarte.entitties.Coleta;
 import com.descarte.descarte.entitties.Data;
 
@@ -10,27 +13,28 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogaService extends UniversalService {
+public class LogaService {
 
-    private final String ApiUrl = "https://webservices.loga.com.br/sgo/eresiduos/BuscaPorLatLng?";
+    double lat;
+    double lng;
+    int distance = 100;
 
     public LogaService(double Latitude, double Longitute){
-        super(Latitude, Longitute);
-        this.distance = 100;
+        this.lat = Latitude;
+        this.lng = Longitute;
     }
 
     public LogaService(double Latitude, double Longitute, int distance){
-        super( Latitude, Longitute, distance);
+        this(Latitude,Longitute);
+        this.distance = distance;
     }
 
-    @Override
-    public String ApiUrlBuild(){
-        return ApiUrl + "distance=" + distance + "&lat="+lat+"&lng="+lng+"&agruparLogradourosMesmaRua=true";
+    public String ApiUrlBuild(Context context){
+        return context.getString(R.string.LogaUrl) + "?distance=" + distance + "&lat="+lat+"&lng="+lng+"&agruparLogradourosMesmaRua=true";
     }
 
-    @Override
-    public void GetDataAsync(OnDataReceivedListener listener) {
-        Connection conn = new Connection(ApiUrlBuild());
+    public void GetDataAsync(Context context,OnDataReceivedListener listener) {
+        Connection conn = new Connection(ApiUrlBuild(context));
         conn.getDataAsync().thenAccept(resultString -> {
             List<Data> results = new ArrayList<Data>();
             try {
@@ -104,4 +108,7 @@ public class LogaService extends UniversalService {
         });
     }
 
+    public interface OnDataReceivedListener {
+        void onDataReceived(List<Data> results);
+    }
 }

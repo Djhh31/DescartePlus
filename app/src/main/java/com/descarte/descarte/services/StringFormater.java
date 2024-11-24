@@ -77,5 +77,10 @@ public class StringFormater {
         return text;
     }
 
+    private static String noSpaces(String text){
+        text = text.replaceAll(" ", "+");
+        return text;
+    }
+
 
 }
